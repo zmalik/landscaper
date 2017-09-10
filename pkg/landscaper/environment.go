@@ -38,6 +38,19 @@ type Environment struct {
 	TillerNamespace   string        // where to install / use tiller
 	helmClient        helm.Interface
 	kubeClient        internalversion.CoreInterface
+	DisabledStages    arrayFlags     // stages to disable during landscaper apply
+}
+
+
+type arrayFlags []string
+
+func (i *arrayFlags) String() string {
+	return "arrayFlag"
+}
+
+func (i *arrayFlags) Set(value string) error {
+	*i = append(*i, value)
+	return nil
 }
 
 // HelmClient makes sure the environment has a HelmClient initialized and returns it
