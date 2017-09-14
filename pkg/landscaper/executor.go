@@ -89,6 +89,7 @@ func (e *executor) Apply(desired, current Components) error {
 	}
 
 	if e.stageEnabled("delete") {
+		logrus.Infof("hola que hace")
 		for _, cmp := range delete {
 			if err := e.DeleteComponent(cmp); err != nil {
 				logrus.WithFields(logrus.Fields{"error": err}).Error("DeleteComponent failed")
